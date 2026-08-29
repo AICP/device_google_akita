@@ -5,7 +5,7 @@
 #
 
 # Inherit some common stuff
-$(call inherit-product, vendor/lineage/config/common_full_phone.mk)
+$(call inherit-product, vendor/aicp/config/common_full_phone.mk)
 
 # Inherit device configuration
 DEVICE_CODENAME := akita
@@ -16,7 +16,7 @@ $(call inherit-product, $(DEVICE_PATH)/aosp_$(DEVICE_CODENAME).mk)
 # Device identifier. This must come after all inclusions
 PRODUCT_BRAND := google
 PRODUCT_MODEL := Pixel 8a
-PRODUCT_NAME := lineage_$(DEVICE_CODENAME)
+PRODUCT_NAME := aicp_$(DEVICE_CODENAME)
 
 # Boot animation
 TARGET_SCREEN_HEIGHT := 2400
@@ -28,3 +28,22 @@ PRODUCT_BUILD_PROP_OVERRIDES += \
     DeviceProduct=$(DEVICE_CODENAME)
 
 $(call inherit-product, $(VENDOR_PATH)/$(DEVICE_CODENAME)-vendor.mk)
+
+# AICP Device Maintainers
+PRODUCT_BUILD_PROP_OVERRIDES += \
+    DEVICE_MAINTAINERS="Moshe Barash (mosimchah)"
+
+# PixelParts app
+PRODUCT_PACKAGES += \
+    PixelParts
+
+# PixelParts init rc
+PRODUCT_PACKAGES += \
+    init.pixelparts.rc
+
+# PixelParts sepolicy
+BOARD_SEPOLICY_DIRS += packages/apps/PixelParts/sepolicy
+
+# Quick Tap
+PRODUCT_PACKAGES += \
+    ColumbusService
